@@ -1,0 +1,241 @@
+<html>
+
+<head>  
+   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="shortcut icon" type="image/png" href="assets/favicon.png"/>
+  <title>Hot Potato Coin - Token Sale Distribution</title>
+  <meta name="author" content="Vladimir Kartoplya">
+  <meta name="description" content="Hot Potato Coin - The 30-Day Token - Buy it while it's hot!">
+  <meta name="keywords" content="hot, potato, coin, token, ethereum, erc20, ico, tokensale, sale, initial, coin, offering, blockchain, block, chain, bitcoin, pow, ">
+
+</head>
+
+<body class="distribution-page">
+
+    <script src="js/app.bundle.js"></script>
+
+    <div class="container">
+
+        <a href="/">
+            <img class="center" src="/assets/potatologo.png" width="100">
+        </a>
+        <h2 class="title">HOT POTATO - TOKEN DISTRIBUTION</h2>
+
+        <div id="contractInfo" class="tokensale-card">
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="contractAddress">Contract Address</label>
+                        <div class="input-group">
+                            <input type="text" 
+                                class="form-control" 
+                                id="contractAddress" 
+                                value="Loading..." 
+                                disabled
+                                aria-label="Contract address" 
+                                aria-describedby="copyContractBtn">
+                            <button id="copyContractBtn"
+                                    data-original-title="Copy to clipboard" 
+                                    data-toggle="tooltip" 
+                                    data-placement="bottom" 
+                                    class="btn btn-primary-big input-group-addon">
+                                Copy
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="ethWalletAddress">Your Ethereum Address</label>
+                        <input type="text" class="form-control" id="ethWalletAddress" value="Loading..." disabled>
+                    </div>
+                </div>
+            </div>
+
+            <hr>
+
+            <label for="currentBalance">Token Balance</label>
+            <input type="text" class="form-control" id="currentBalance" value="Loading..." disabled>
+            <div id="transactionProcessing" class="hide align-center ">
+                <i class="fa fa-circle-o-notch fa-spin"></i>
+                Transaction processing...
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+
+                <h2 class="title2">Get tokens</h2> 
+                <div id="getTokens" class="tokensale-card">
+
+                    <form id="buyForm" action="#">
+
+                        <div class="input-group">
+                            <input id="calculateEth" 
+                                type="number" 
+                                class="form-control" 
+                                placeholder="Enter amount..." 
+                                aria-describedby="eth-addon" 
+                                min="0"
+                                step=any
+                                required>
+                            <span class="input-group-addon" id="eth-addon">ETH</span>
+                        </div>
+
+                        <div class="input-group">
+                            <input id="calculateHP" 
+                                type="number" 
+                                class="form-control" 
+                                value="0" 
+                                aria-describedby="hp-addon" 
+                                step=any
+                                min="0">
+                            <span class="input-group-addon" id="hp-addon">HPO</span>
+                        </div>
+                        <div>
+                            <button type="submit" class="btn btn-primary btn-primary-big">Get Potatoes</button>
+                            <div id="metamaskOpening" class="hide align-center">
+                                <i class="fa fa-circle-o-notch fa-spin"></i>
+                                Opening Metamask...
+                            </div>
+                        </div>
+
+                    </form>
+                    
+                </div>
+            </div>
+
+            <div class="col-md-6">
+
+                <h2 class="title2">How it works</h2>            
+                <div id="howItWorks" class="tokensale-card">
+                    <div class="title3">
+                        <span class="lighter-text">How to Buy Hot Potatoes</span> (Recommended Configuration)
+                    </div>
+                    <ol>
+                        <li>Download the <span class="lighter-text">Metamask</span> Chrome extension <a href="https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn?hl=en" target="_blank">here</a>.</li>
+                        <li>Run <span class="lighter-text">Metamask</span>.</li>
+                        <li>Create a new wallet.</li>
+                        <li>Transfer some <span class="lighter-text">Ether</span> to the Metamask wallet.</li>
+                        <li><span class="lighter-text">Buy</span> hot potatoes!</li>
+                    </ol>
+                    <p>Alternatively, you can directly transfer Ether to the wallet contract address.</p>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="title2">Token Information</h2> 
+
+        <div class="card">
+          <div class="card-header">
+
+            <div class="container-fluid">
+                <div class="row">
+                    <div id="metamaskTab" class="token-info-tab col-4 col-md-4 active" onclick="showTokenInfoTab('metamask')">
+                        MetaMask
+                    </div>
+
+                    <div id="myetherTab" class="token-info-tab col-4 col-md-4" onclick="showTokenInfoTab('myether')">
+                        MyEtherWallet
+                    </div>
+
+                    <div id="etherwalletTab" class="token-info-tab col-4 col-md-4" onclick="showTokenInfoTab('etherwallet')">
+                        Ethereum Wallet
+                    </div>
+                </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <p>
+                Token contract address:
+                    <span id="tokenContractAddress" 
+                        class="lighter-text" 
+                        data-original-title="Copy to clipboard" 
+                        data-toggle="tooltip" 
+                        data-placement="bottom"></span><br>
+                Token name: <span class="lighter-text">HPO</span><br>
+                Decimals: <span class="lighter-text">18</span><br>
+            </p>
+
+            <p>
+                To add it to your wallet, follow these instructions:
+            </p>
+            <div id="metamaskDetails">
+                <ol>
+                    <li>In the <span class="lighter-text">Tokens</span> section, click '<span class="lighter-text">Add Token</span>'</li>
+                    <li>Enter the Token information above.</li>
+                    <li>Click '<span class="lighter-text">Save</span>'</li>
+                </ol>
+            </div>
+            <div id="myetherDetails" class="hide">
+                <ol>
+                    <li>In the <span class="lighter-text">Token Balances</span> section, click '<span class="lighter-text">Add Custom Token</span>'</li>
+                    <li>Enter the Token information above.</li>
+                    <li>Click '<span class="lighter-text">Save</span>'</li>
+                </ol>
+            </div>
+            <div id="etherwalletDetails" class="hide">
+                <ol>
+                    <li>Click '<span class="lighter-text">Contracts</span>'</li>
+                    <li>Click '<span class="lighter-text">Watch Contract</span>'</li>
+                    <li>Enter the Token information above.</li>
+                    <li>The rest of the details should auto-populate.</li>
+                    <li>Click '<span class="lighter-text">OK</span>'</li>
+                </ol>
+            </div>
+          </div>
+        </div>
+
+        <div class="align-center copyright">
+            <small class="title">Copyright © The Hot Potato Foundation 2017</small>
+        </div>
+
+    </div>
+
+    <div class="modal fade" id="transactionPendingModal" tabindex="-1" role="dialog" aria-labelledby="transactionPendingModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-hotpotato-light text-hotpotato">
+                    <h5 class="modal-title" id="transactionPendingModalLabel">Hot Potato</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span class="text-white" aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Thank you for buying Hot Potato.<br><br>
+                    Your transaction is being processed and your balance will be updated shortly.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary-big" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="installMetamaskModal" tabindex="-1" role="dialog" aria-labelledby="installMetamaskModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-hotpotato-light text-hotpotato">
+                    <h5 class="modal-title" id="installMetamaskModalLabel">Failed! Install MetaMask</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span class="text-white" aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Please install MetaMask.<br><br>
+                    Check below for instructions..
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary-big" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+
+</html>
